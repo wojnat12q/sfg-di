@@ -1,4 +1,4 @@
-package guru.springframework.sftgi.service;
+package com.springframeworks.pets;
 
 public interface PetService {
     String getPetType();
