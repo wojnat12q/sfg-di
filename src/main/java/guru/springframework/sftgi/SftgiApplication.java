@@ -1,9 +1,6 @@
 package guru.springframework.sftgi;
 
-import guru.springframework.sftgi.controlers.ConstructionIncejtedControler;
-import guru.springframework.sftgi.controlers.MyController;
-import guru.springframework.sftgi.controlers.ProperyInjectedController;
-import guru.springframework.sftgi.controlers.SetterInjectedcontroller;
+import guru.springframework.sftgi.controlers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +10,15 @@ public class SftgiApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SftgiApplication.class, args);
+
+		PetController petController = ctx.getBean("petController", PetController.class);
+		System.out.println("--- The Best Pet is ---");
+		System.out.println(petController.whichPetIsTheBest());
+
+
+		i18nController i18nController =(i18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
+
 
 		MyController myController = (MyController) ctx.getBean("myController");
 
