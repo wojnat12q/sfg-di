@@ -14,11 +14,10 @@ public class SftgiApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SftgiApplication.class, args);
 
-		MyController controller = (MyController) ctx.getBean("myController");
+		MyController myController = (MyController) ctx.getBean("myController");
 
-		String greetings = controller.sayHello();
-
-		System.out.println(greetings);
+		System.out.println("----------Primary bean");
+		System.out.println(myController.sayHello());
 
 		System.out.println("----------Property");
 
