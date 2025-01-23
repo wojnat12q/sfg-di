@@ -2,22 +2,36 @@ package guru.springframework.sftgi.config;
 
 import com.springframeworks.pets.PetService;
 import com.springframeworks.pets.PetServiceFactory;
+import guru.springframework.sftgi.datasorce.FakeDataSorce;
 import guru.springframework.sftgi.repository.EnglishGreetingRepository;
 import guru.springframework.sftgi.repository.EnglishGreetingRepositoryImpl;
 import guru.springframework.sftgi.service.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
+@PropertySource("classpath:datasorce.properties")
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    FakeDataSorce fakeDataSorce(@Value("${guru.username}") String username,
+                                @Value("${guru.password}")  String password,
+                                @Value("${guru.jbdcurl}") String jbdcurl) {
+        FakeDataSorce fakeDataSorce = new FakeDataSorce();
+        fakeDataSorce.setUsername(username);
+        fakeDataSorce.setPassword(password);
+        fakeDataSorce.setJdbcurl(jbdcurl);
+        return fakeDataSorce;
+    }
     @Bean
     PetServiceFactory petServiceFactory(){
         return new PetServiceFactory();
     }
     @Profile({"dog", "default"})
     @Bean
-    PetService dogPetService(PetServiceFactory petServiceFactory, PetService petService){
-        return petServiceFactory.getPetService("dog");
+    PetService dogPetService(PetServiceFactory petServiceFactory){
+       return petServiceFactory.getPetService("dog");
     }
     @Bean
     @Profile("cat")
@@ -46,7 +60,7 @@ public class GreetingServiceConfig {
         return new PrimaryGreetingService();
     }
 
-    //@Bean
+    @Bean
     ConstructorGreetingsService constructorGreetingService(){
         return new ConstructorGreetingsService();
     }
