@@ -24,15 +24,18 @@ public class GreetingServiceConfig {
         fakeDataSource.setJdbcurl(jdbcurl);
         return fakeDataSource;
     }
+
     @Bean
     PetServiceFactory petServiceFactory(){
         return new PetServiceFactory();
     }
+
     @Profile({"dog", "default"})
     @Bean
     PetService dogPetService(PetServiceFactory petServiceFactory){
        return petServiceFactory.getPetService("dog");
     }
+
     @Bean
     @Profile("cat")
     PetService catPetService(PetServiceFactory petServiceFactory){
@@ -44,10 +47,12 @@ public class GreetingServiceConfig {
     I18nSpanishGreetingService i18NSpanishService(){
         return new I18nSpanishGreetingService();
     }
+
     @Bean
     EnglishGreetingRepository englishGreetingRepository(){
         return new EnglishGreetingRepositoryImpl();
     }
+
     @Profile("EN")
     @Bean
     I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository ){
