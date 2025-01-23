@@ -9,20 +9,20 @@ import guru.springframework.sftgi.service.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
-@PropertySource("classpath:datasorce.properties")
+
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
     @Bean
-    FakeDataSorce fakeDataSorce(@Value("${guru.username}") String username,
-                                @Value("${guru.password}")  String password,
-                                @Value("${guru.jbdcurl}") String jbdcurl) {
-        FakeDataSorce fakeDataSorce = new FakeDataSorce();
-        fakeDataSorce.setUsername(username);
-        fakeDataSorce.setPassword(password);
-        fakeDataSorce.setJdbcurl(jbdcurl);
-        return fakeDataSorce;
+    FakeDataSorce fakeDataSource(@Value("${guru.username}") String username,
+                                  @Value("${guru.password}") String password,
+                                  @Value("${guru.jdbcurl}") String jdbcurl){
+        FakeDataSorce fakeDataSource = new FakeDataSorce();
+        fakeDataSource.setUsername(username);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setJdbcurl(jdbcurl);
+        return fakeDataSource;
     }
     @Bean
     PetServiceFactory petServiceFactory(){
