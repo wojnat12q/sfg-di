@@ -1,5 +1,6 @@
 package guru.springframework.sftgi;
 
+import guru.springframework.sftgi.config.SfgConfiguration;
 import guru.springframework.sftgi.controlers.*;
 import guru.springframework.sftgi.datasorce.FakeDataSorce;
 import guru.springframework.sftgi.service.PrototypeBean;
@@ -56,11 +57,20 @@ public class SftgiApplication {
 		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
 		System.out.println(prototypeBean2.getMyScope());
 
+		System.out.println("--------------Fake Data");
 
 		FakeDataSorce fakeDataSorce	= ctx.getBean(FakeDataSorce.class);
 		System.out.println(fakeDataSorce.getUsername());
 		System.out.println(fakeDataSorce.getPassword());
 		System.out.println(fakeDataSorce.getJdbcurl());
+
+		System.out.println("--------------Config Props Bean");
+		SfgConfiguration sfgConfiguration = ctx.getBean(SfgConfiguration.class);
+		System.out.println(sfgConfiguration.getUsername());
+		System.out.println(sfgConfiguration.getPassword());
+		System.out.println(sfgConfiguration.getJdbcurl());
+
+
 
 	}
 
